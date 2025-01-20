@@ -15,7 +15,7 @@ class FilterDialog extends StatefulWidget {
   final void Function(String data)? onFilterAdded;
   final void Function(String data)? onFilterRemoved;
 
-  const SettingsDialog({
+  const FilterDialog({
     super.key,
     this.getHideMetadata,
     this.getFilters,
