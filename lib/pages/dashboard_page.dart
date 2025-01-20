@@ -2458,11 +2458,11 @@ class _AddWidgetDialogState extends State<_AddWidgetDialog> {
                             showDialog(
                               context: context,
                               builder: (context) => FilterDialog(
-                                () => return _hideMetadata,
-                                () => return _typeFilter,
-                                (bool value) => _hideMetadata = value,
-                                (String add) => _typeFilter.add(add),
-                                (String del) => _typeFilter.remove(del),
+                                getHideMetadata: () {return _hideMetadata},
+                                getFilters: () {return _typeFilter},
+                                onMetadataChanged: (bool value) {_hideMetadata = value},
+                                onFilterAdded: (String add) {_typeFilter.add(add)},
+                                onFilterRemoved: (String del) {_typeFilter.remove(del)},
                               ),
                             );
 
