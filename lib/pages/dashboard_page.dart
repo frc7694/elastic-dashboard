@@ -40,6 +40,7 @@ import 'package:elastic_dashboard/widgets/draggable_containers/models/widget_con
 import 'package:elastic_dashboard/widgets/draggable_dialog.dart';
 import 'package:elastic_dashboard/widgets/editable_tab_bar.dart';
 import 'package:elastic_dashboard/widgets/network_tree/networktables_tree.dart';
+import 'package:elastic_dashboard/widgets/network_tree/filter_dialog.dart';
 import 'package:elastic_dashboard/widgets/settings_dialog.dart';
 import 'package:elastic_dashboard/widgets/tab_grid.dart';
 import '../widgets/draggable_containers/models/layout_container_model.dart';
@@ -2380,6 +2381,7 @@ class _AddWidgetDialog extends StatefulWidget {
 class _AddWidgetDialogState extends State<_AddWidgetDialog> {
   bool _hideMetadata = true;
   String _searchQuery = '';
+  Set<String> _typeFilter = {};
 
   @override
   Widget build(BuildContext context) {
@@ -2451,9 +2453,20 @@ class _AddWidgetDialogState extends State<_AddWidgetDialog> {
                     children: [
                       Builder(builder: (context) {
                         return IconButton(
-                          icon: const Icon(Icons.settings),
+                          icon: const Icon(Icons.settings),//here//
                           onPressed: () {
-                            showPopover(
+                            showDialog(
+                              context: context,
+                              builder: (context) => FilterDialog(
+                                () => return _hideMetadata,
+                                () => return _typeFilter,
+                                (bool value) => _hideMetadata = value,
+                                (String add) => _typeFilter.add(add),
+                                (String del) => _typeFilter.remove(del),
+                              ),
+                            );
+
+                            /*showPopover(
                               context: context,
                               direction: PopoverDirection.top,
                               transitionDuration:
@@ -2474,7 +2487,7 @@ class _AddWidgetDialogState extends State<_AddWidgetDialog> {
                                   ),
                                 );
                               },
-                            );
+                            );*/
                           },
                         );
                       }),
